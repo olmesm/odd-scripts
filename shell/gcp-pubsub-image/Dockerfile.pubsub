@@ -1,0 +1,12 @@
+FROM openjdk:11-slim
+EXPOSE 8085
+
+WORKDIR /root
+
+RUN apt-get update -y && apt-get install python3 curl -y
+
+COPY . .
+
+RUN bash ./setup-gcp-cli.sh
+
+CMD ["bash", "./entrypoint.sh"]
