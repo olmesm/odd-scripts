@@ -1,7 +1,6 @@
 # Secrets
 
-[Sops](https://github.com/mozilla/sops) is used to ensure secure files are encrypted at rest. The scripts have been
-reused from work done by Ol (thanks Ol!).
+[Sops](https://github.com/mozilla/sops) is used to ensure secure files are encrypted at rest.
 
 Currently, the file that needs to be encrypted is [secrets.yaml](/data/secrets.yaml). However, this may be extended to
 other files in the future.

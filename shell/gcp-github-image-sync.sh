@@ -12,11 +12,11 @@ PROJECT=${3:-"main-project"}
 ARTEFACT_REPO=${4:-"main-repo"}
 IMAGE_NAME=${5:-"main-image"}
 
-echo ">> Pulling Image"
+echo "[info] Pulling Image"
 docker pull ghcr.io/requarks/$IMAGE_NAME:$TAG --platform=x86_64 #   --platform=x86_64 is m1 workaround
 
-echo ">> Tagging Image"
+echo "[info] Tagging Image"
 docker tag ghcr.io/requarks/$IMAGE_NAME:$TAG $LOCATION-docker.pkg.dev/$PROJECT/$ARTEFACT_REPO/$IMAGE_NAME:$TAG
 
-echo ">> Pushing Image"
+echo "[info] Pushing Image"
 docker push  $LOCATION-docker.pkg.dev/$PROJECT/$ARTEFACT_REPO/$IMAGE_NAME:$TAG

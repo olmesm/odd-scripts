@@ -31,8 +31,8 @@ sv
 mkdir -p "$OUT_DIR"
 
 for flag in $FLAG_LIST; do 
-  echo ">> Downloading $flag to $OUT_DIR/$flag.png"
+  echo "[info] Downloading $flag to $OUT_DIR/$flag.png"
   curl --silent "https://countryflagsapi.com/png/$flag" -o "$OUT_DIR/$flag.png"
-  echo ">> Downloading $flag to $OUT_DIR/$flag.svg"
+  echo "[info] Downloading $flag to $OUT_DIR/$flag.svg"
   curl --silent "https://countryflagsapi.com/svg/$flag" -o "$OUT_DIR/$flag.svg"
 done

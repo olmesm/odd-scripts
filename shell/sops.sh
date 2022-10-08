@@ -21,9 +21,10 @@ function decrypt() {
 
   if [ $STD_RESULT -eq 0 ]; then
     sops -d $1.yaml > $1.desopped.yaml
-    echo "> Written to $1.desopped.yaml" 
+    echo "[info] Written to $1.desopped.yaml" 
   else 
-    echo "> Failed to decrypt $1.yaml" 
+    echo "[error] Failed to decrypt $1.yaml" 
+    exit 1
   fi
 }
 
@@ -33,15 +34,16 @@ function encrypt() {
 
   if [ $STD_RESULT -eq 0 ]; then
     sops -e $1.desopped.yaml > $1.yaml
-    echo "> Written to $1.yaml"
+    echo "[info] Written to $1.yaml"
     rm $1.desopped.yaml
   else 
-    echo "> Failed to encrypt $1.desopped.yaml" 
+    echo "[error] Failed to encrypt $1.desopped.yaml"
+    exit 1
   fi
 }
 
 if [ -z "$VAR_FILE_PATH" ]; then
-  echo "Please specify the directory with a \".sops.yaml\" in the root."
+  echo "[error] Please specify the directory with a \".sops.yaml\" in the root."
   
   exit 1
 fi
@@ -49,21 +51,21 @@ fi
 cd $VAR_FILE_PATH
 
 if [ -z "$VAR_SOPS_FILE" ]; then
-  echo "Can't find \".sops.yaml\" in the root."
+  echo "[error] Can't find \".sops.yaml\" in the root."
   
   cd $PWD
   exit 1
 fi
 
 if [ -z "$VAR_ACTION" ]; then
-  echo "Please specify an encrypt or decrypt argument"
+  echo "[error] Please specify an encrypt or decrypt argument"
   
   cd $PWD
   exit 1
 fi
 
 if [ -z "$VAR_FILE_NAME" ]; then
-  echo "Please specify a filename without the extension. eg for \"my-secrets.yaml\", type \"my-secrets\""
+  echo "[error] Please specify a filename without the extension. eg for \"my-secrets.yaml\", type \"my-secrets\""
   
   cd $PWD
   exit 1

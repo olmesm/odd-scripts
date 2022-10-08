@@ -20,22 +20,22 @@ IFS=$'\n'
 # ```
 
 if [ -z "$VAR_ENV_FILE" ]; then
-  echo "Failed to find \`$VAR_ENV_FILE\`"
-  echo "Please create it or specify a different file"
-  echo "sh ./scripts/check-env.sh [$VAR_ENV_FILE $VAR_ENV_EXAMPLE_FILE]"
+  echo "[error] Failed to find \`$VAR_ENV_FILE\`"
+  echo "[error] Please create it or specify a different file"
+  echo "[error] sh ./scripts/check-env.sh [$VAR_ENV_FILE $VAR_ENV_EXAMPLE_FILE]"
 
   exit 1
 fi
 
 if [ -z "$VAR_ENV_EXAMPLE_FILE" ]; then
-  echo "Failed to find \`$VAR_ENV_EXAMPLE_FILE\`"
-  echo "Please create it or specify a different file"
-  echo "sh ./scripts/check-env.sh [$VAR_ENV_FILE $VAR_ENV_EXAMPLE_FILE]"
+  echo "[error] Failed to find \`$VAR_ENV_EXAMPLE_FILE\`"
+  echo "[error] Please create it or specify a different file"
+  echo "[error] sh ./scripts/check-env.sh [$VAR_ENV_FILE $VAR_ENV_EXAMPLE_FILE]"
 
   exit 1
 fi
 
-echo "\n[CHECKING \`$VAR_ENV_FILE\` AND \`$VAR_ENV_EXAMPLE_FILE\`]"
+echo "\n[info] Checking \`$VAR_ENV_FILE\` and \`$VAR_ENV_EXAMPLE_FILE\`"
 
 for LINE_ENV_VAR in $(grep -v '^#' "$VAR_ENV_FILE"); do
   VARIABLE=$(echo $LINE_ENV_VAR | sed "s/=.*//")
@@ -43,15 +43,15 @@ for LINE_ENV_VAR in $(grep -v '^#' "$VAR_ENV_FILE"); do
 
   if [[ "$REF_COUNT" -ne "1" ]]; then
     HAS_FOUND_MISMATCH=true
-    echo "[MISSING VAR]: $VARIABLE"
+    echo "[error]: Missing variable $VARIABLE"
   fi
 done
 
-echo "\n[CHECKING COMPLETED]"
+echo "\n[info] Checking Completed"
 
 if { [ "$IS_STRICT" = true ] && [ "$HAS_FOUND_MISMATCH" = true ]; }; then
 
-  echo "\n[NOTE] Loads of errors?
+  echo "\n[info] Loads of errors?
 There should be no spaces between the variable declaration and value in your $VAR_ENV_FILE file.
 
 \`\`\`

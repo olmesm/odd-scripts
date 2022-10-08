@@ -1,7 +1,7 @@
 import path from "path";
 import fs from "fs";
 
-export const mkdirp = (outFile: string) => {
+export const mkdirp = (outFile: string): void => {
   fs.mkdirSync(path.dirname(outFile), {
     recursive: true,
   });
@@ -9,9 +9,9 @@ export const mkdirp = (outFile: string) => {
 
 const defaultColourFunction = (s: string): string => s;
 
-export const write = (outFile: string, data: string, { colourFunction = defaultColourFunction }) => {
+export const write = (outFile: string, data: string, { colourFunction = defaultColourFunction }): void => {
   mkdirp(outFile);
-  console.log(colourFunction(`Written ${outFile}`));
+  console.log(colourFunction(`[info] Wrote ${outFile}`));
 
   return fs.writeFileSync(outFile, data, "utf8");
 };

@@ -20,5 +20,5 @@ if [[ $BRANCH_NAME =~ ^master$ ]]; then
   exit 0
 fi
 
-echo "Did not match branch naming rules set for the project"
+echo "[error] Did not match branch naming rules set for the project"
 exit 1
