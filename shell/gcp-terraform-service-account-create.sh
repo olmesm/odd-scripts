@@ -2,7 +2,7 @@
 
 PARENT="$(basename $(pwd))"
 PROJECT_ID="${1:-$GCP_PROJECT}"
-ACCOUNT_NAME="${2:-"tf-sa-$PARENT"}"
+ACCOUNT_NAME="${2:-"tf-sa-$PARENT"} | head -c 30"
 
 OUTPUT="tmp/service-account.json"
 
