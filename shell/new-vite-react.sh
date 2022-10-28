@@ -12,7 +12,7 @@ FILE_LIST=(
 
 echo "[info] create the project"
 
-yes | npm create vite@latest $PROJECT_NAME -- --template react-ts 1>/dev/null
+VITE_OUTPUT=<(yes | npm create vite@latest $PROJECT_NAME -- --template react-ts 1)
 
 for file in ${FILE_LIST[@]}; do
     echo "[info] Removing $PROJECT_NAME/$file"
@@ -41,3 +41,5 @@ echo "[info] creating index.css"
 touch "$PROJECT_NAME/src/index.css"
 
 echo "[info] done!"
+
+echo "$VITE_OUTPUT"
